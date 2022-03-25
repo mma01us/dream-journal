@@ -69,10 +69,10 @@ An Example Dream:
 
 ## Site map
 
-![Alt text](documentation/site-map1 "Sitemap")
+![Alt text](documentation/site-map1.png "Sitemap")
 *Target Sitemap*
 
-![Alt text](documentation/site-map1 "Sitemap")
+![Alt text](documentation/site-map1.png "Sitemap")
 *Sharing Sitemap - To be implemented if time permitting*
 
 ## User Stories or Use Cases
