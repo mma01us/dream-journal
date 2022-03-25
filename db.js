@@ -1,34 +1,40 @@
 const mongoose = require('mongoose'),
-	URLSlugs = require('mongoose-url-slugs'),
-  passportLocalMongoose = require('passport-local-mongoose');
+	URLSlugs = require('mongoose-url-slugs')
+
+const config = require('./config')
+// unpack into vars
+const { db: { host, port, name } } = config
 
 
 const User = new mongoose.Schema({
-  // username, password
-  lists:  [{ type: mongoose.Schema.Types.ObjectId, ref: 'List' }]
+	username: { type: String, required: true, index: { unique: true } },
+  pass: { type: String, required: true },
+	theme: { type: Number, required: true},
+	calendar: { type: Boolean, required: true},
+  dreams:  [{ type: mongoose.Schema.Types.ObjectId, ref: 'Dream' }]
 });
 
-const Item = new mongoose.Schema({
-	name: {type: String, required: true},
-	quantity: {type: Number, min: 1, required: true},
-	checked: {type: Boolean, default: false, required: true}
+const Section = new mongoose.Schema({
+	item: {type: String, required: true},
+	data: {type: String}
 }, {
 	_id: true
 });
 
 
-const List = new mongoose.Schema({
+const Dream = new mongoose.Schema({
   user: {type: mongoose.Schema.Types.ObjectId, ref:'User'},
   name: {type: String, required: true},
-	createdAt: {type: Date, required: true},
-	items: [Item]
+	date: {type: Date, required: true},
+	quality: {type: Number, required: true},
+	mood: {type: Number, required: true},
+	sections: [Section],
+	lastEdit: {type: Date, required: true}
 });
 
-
-User.plugin(passportLocalMongoose);
-List.plugin(URLSlugs('name'));
+Dream.plugin(URLSlugs('name'));
 
 mongoose.model('User', User);
-mongoose.model('List', List);
-mongoose.model('Item', Item);
-mongoose.connect('mongodb://localhost/grocerydb');
+mongoose.model('Dream', Dream);
+mongoose.model('Section', Section);
+mongoose.connect(`mongodb://${host}/${name}`);

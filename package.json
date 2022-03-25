@@ -1,33 +1,40 @@
 {
-  "name": "final-project-template",
+  "name": "dream-journal",
   "version": "1.0.0",
-  "description": "The content below is an example project proposal / requirements document. Replace the text below the lines marked \"__TODO__\" with details specific to your project. Remove the \"TODO\" lines.",
+  "description": "A journal to track your dreams.",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node app.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nyu-csci-ua-0467-001-002-spring-2022/final-project-template.git"
+    "url": "git+https://github.com/nyu-csci-ua-0467-001-002-spring-2022/final-project-mma01us.git"
   },
-  "author": "",
+  "author": "Michael Ma",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/nyu-csci-ua-0467-001-002-spring-2022/final-project-template/issues"
+    "url": "https://github.com/nyu-csci-ua-0467-001-002-spring-2022/final-project-mma01us/issues"
   },
-  "homepage": "https://github.com/nyu-csci-ua-0467-001-002-spring-2022/final-project-template#readme",
+  "homepage": "https://github.com/nyu-csci-ua-0467-001-002-spring-2022/final-project-mma01us#readme",
+  "devDependencies": {
+    "css-loader": "^6.7.1",
+    "eslint": "^8.12.0",
+    "eslint-plugin-mocha": "^10.0.3",
+    "mini-css-extract-plugin": "^2.6.0",
+    "sass": "^1.49.9",
+    "sass-loader": "^12.6.0",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.70.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-node-externals": "^3.0.0"
+  },
   "dependencies": {
+    "convict": "^6.2.1",
     "express": "^4.17.3",
     "express-session": "^1.17.2",
     "hbs": "^4.2.0",
-    "mongoose": "^6.2.7",
-    "mongoose-url-slugs": "^0.1.4",
-    "passport": "^0.5.2",
-    "passport-local": "^1.0.0",
-    "passport-local-mongoose": "^7.0.0"
-  },
-  "devDependencies": {
-    "eslint": "^8.11.0",
-    "eslint-plugin-mocha": "^10.0.3"
+    "mongoose": "^6.2.8",
+    "mongoose-url-slugs": "^1.0.2",
+    "nodemon": "^2.0.15"
   }
 }

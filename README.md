@@ -1,117 +1,110 @@
 The content below is an example project proposal / requirements document. Replace the text below the lines marked "__TODO__" with details specific to your project. Remove the "TODO" lines.
 
-(__TODO__: your project name_)
-
-# Shoppy Shoperson 
+# Dream Journal
 
 ## Overview
 
-(__TODO__: a brief one or two paragraph, high-level description of your project_)
-
-Remembering what to buy at the grocery store is waaaaay too difficult. Also, shopping for groceries when you're hungry leads to regrettable purchases. Sooo... that's where Shoppy Shoperson comes in!
-
-Shoppy Shoperson is a web app that will allow users to keep track of multiple grocery lists. Users can register and login. Once they're logged in, they can create or view their grocery list. For every list that they have, they can add items to the list or cross off items.
+Have you ever had a dream that was really interesting but forgot about it an hour later? Dream Journal is a web application that let's you track your dreams. Users must login to store their dreams so they remain between sessions. Dreams are linked with a date and include a scale for users to rate how they felt afterwards. Users can name the dream. Additionally, users can view a calendar view of all of their dreams and how they felt about them. Included will be a settings menu for users to choose if they want a list or calendar view as their main page, and a theme customization. (If time permitting, users can share their dreams for others to see on a public forum. Other users can upvote or downvote a dream.)
 
 
 ## Data Model
 
-(__TODO__: a description of your application's data and their relationships to each other_) 
+The application will store Users, Dreams, and Sections
 
-The application will store Users, Lists and Items
-
-* users can have multiple lists (via references)
-* each list can have multiple items (by embedding)
-
-(__TODO__: sample documents_)
+* users can have multiple dreams (via references - this is to set up the structure for sharing)
+* dreams can have multiple sections (embedded)
 
 An Example User:
 
 ```javascript
 {
-  username: "shannonshopper",
-  hash: // a password hash,
-  lists: // an array of references to List documents
+  username: // selected username,
+  pass: // a password hash,
+  theme: // integer representing user preferred theme
+  calendar: // boolean T/F for user preferred view
+  dreams: // an array of references to List documents
 }
 ```
 
-An Example List with Embedded Items:
+An Example Dream:
 
 ```javascript
 {
   user: // a reference to a User object
-  name: "Breakfast foods",
-  items: [
-    { name: "pancakes", quantity: "9876", checked: false},
-    { name: "ramen", quantity: "2", checked: true},
+  name: // name of dream
+  date: // recorded date of dream
+  quality: // user recorded quality of dream
+  mood: // user mood - stored as integer - how they felt in the morning
+  sections: [
+    { item: "text", checked: false},
+    { item: "image", data: "/images/image.png"},
   ],
-  createdAt: // timestamp
+  lastEdit: // timestamp for last edit
 }
 ```
 
 
-## [Link to Commented First Draft Schema](db.js) 
+## [Link to Commented First Draft Schema](db.js)
 
-(__TODO__: create a first draft of your Schemas in db.js and link to it_)
+(__TODO__: update schema draft in db.js_)
 
 ## Wireframes
 
-(__TODO__: wireframes for all of the pages on your site; they can be as simple as photos of drawings or you can use a tool like Balsamiq, Omnigraffle, etc._)
+/profile - page for showing all personal dreams - list and calendar view
 
-/list/create - page for creating a new shopping list
+![list](documentation/profile-list.png)
+![list](documentation/profile-calendar.png)
 
-![list create](documentation/list-create.png)
+/profile/create - page for creating a new dream
 
-/list - page for showing all shopping lists
+![list create](documentation/profile-create.png)
 
-![list](documentation/list.png)
+/profile/slug - page for viewing and editing specific dream
 
-/list/slug - page for showing specific shopping list
+![list](documentation/profile-dream.png)
 
-![list](documentation/list-slug.png)
+/settings - page for modifying user settings
+
+![list create](documentation/settings.png)
 
 ## Site map
 
-(__TODO__: draw out a site map that shows how pages are related to each other_)
+![Alt text](documentation/site-map1 "Sitemap")
+*Target Sitemap*
 
-Here's a [complex example from wikipedia](https://upload.wikimedia.org/wikipedia/commons/2/20/Sitemap_google.jpg), but you can create one without the screenshots, drop shadows, etc. ... just names of pages and where they flow to.
+![Alt text](documentation/site-map1 "Sitemap")
+*Sharing Sitemap - To be implemented if time permitting*
 
 ## User Stories or Use Cases
 
-(__TODO__: write out how your application will be used through [user stories](http://en.wikipedia.org/wiki/User_story#Format) and / or [use cases](https://www.mongodb.com/download-center?jmp=docs&_ga=1.47552679.1838903181.1489282706#previous)_)
-
 1. as non-registered user, I can register a new account with the site
 2. as a user, I can log in to the site
-3. as a user, I can create a new grocery list
-4. as a user, I can view all of the grocery lists I've created in a single list
-5. as a user, I can add items to an existing grocery list
-6. as a user, I can cross off items in an existing grocery list
+3. as a user, I can create a new dream entry
+4. as a user, I can view all of my dream entries
+5. as a user, I can edit existing dream entries
+6. as a user, I can view my settings
+7. as a user, I can change my visual settings in the settings
+8. as a user, I can view a specific dream entry
 
 ## Research Topics
 
-(__TODO__: the research topics that you're planning on working on along with their point values... and the total points of research topics listed_)
+(__TODO__: update research topics during development_)
 
-* (5 points) Integrate user authentication
-    * I'm going to be using passport for user authentication
-    * And account has been made for testing; I'll email you the password
-    * see <code>cs.nyu.edu/~jversoza/ait-final/register</code> for register page
-    * see <code>cs.nyu.edu/~jversoza/ait-final/login</code> for login page
-* (4 points) Perform client side form validation using a JavaScript library
-    * see <code>cs.nyu.edu/~jversoza/ait-final/my-form</code>
-    * if you put in a number that's greater than 5, an error message will appear in the dom
-* (5 points) vue.js
-    * used vue.js as the frontend framework; it's a challenging library to learn, so I've assigned it 5 points
-
-10 points total out of 8 required points (___TODO__: addtional points will __not__ count for extra credit_)
+* (3 points) Configuration management - Node convict to manage deploys on local machine and free website hosting service such as Herokuapp.
+* (3 points) Webpack to automate:
+  * (2 points) Sass as a CSS preprocessor to help with managing themes.
+* (1 point) External Client Side Library: [Calendarize](https://www.npmjs.com/package/calendarize) for generating the calendar view. It's relatively lightweight and I will need to make changes on top of it so I am assigning it one point.
+* (1 point) External Client Side Library: [rich-markdown-editor](https://www.npmjs.com/package/rich-markdown-editor) for a nice text editor for users to use while editing and writing their dream entries.
+* (1 point) External Client Side Library [canvas-sketch](https://www.npmjs.com/package/canvas-sketch) for users to draw images of their dreams if time permitting. Most of the package is fleshed out so I am assigning it one point.
 
 
-## [Link to Initial Main Project File](app.js) 
 
-(__TODO__: create a skeleton Express application with a package.json, app.js, views folder, etc. ... and link to your initial app.js_)
+10 points total out of 8 required points (11 if time permitting)
+
+
+## [Link to Initial Main Project File](app.js)
 
 ## Annotations / References Used
 
-(__TODO__: list any tutorials/references/etc. that you've based your code off of_)
-
-1. [passport.js authentication docs](http://passportjs.org/docs) - (add link to source code that was based on this)
-2. [tutorial on vue.js](https://vuejs.org/v2/guide/) - (add link to source code that was based on this)
-
+1. [Setting up Sass and Webpack](https://dev.to/deepanjangh/setting-up-css-and-sass-with-webpack-3cg)
+2. [For setting up Webpack with Express](https://binyamin.medium.com/creating-a-node-express-webpack-app-with-dev-and-prod-builds-a4962ce51334)
