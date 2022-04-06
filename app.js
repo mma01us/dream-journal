@@ -7,6 +7,8 @@ const config = require('./config'); // convict config
 const routes = require('./routes/index'); // applies to all routes
 const profile = require('./routes/profile'); // routes for logged in user
 
+const crypto = require('crypto'); // for some randomization and security
+
 const app = express();
 
 // view engine setup
@@ -15,17 +17,28 @@ app.set('view engine', 'hbs');
 
 // enable sessions
 const session = require('express-session');
-//const sessionOptions = {}; // TODO: FINISH THIS
-//app.use(session(sessionOptions));
+const sessionSecret = crypto.randomBytes(20).toString('hex');
+console.log("Secret selected as", sessionSecret);
+const sessionOptions = {
+	secret: sessionSecret, // random base64 string
+	saveUninitialized: false,
+	resave: false
+};
+app.use(session(sessionOptions));
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // make user data available to all templates
-// app.use((req, res, next) => {
-//   res.locals.user = req.user;
-//   next();
-// });
+ app.use((req, res, next) => {
+   if(req.session.user){
+     res.locals.loggedIn = true;
+     res.locals.user = req.session.user;
+   } else {
+     res.locals.loggedIn = false;
+   }
+   next();
+});
 
 app.use('/', routes);
 app.use('/profile', profile);

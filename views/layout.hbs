@@ -1,18 +1,26 @@
 <!DOCTYPE html>
 <head>
-		<title>{{{title}}}</title>
+		<title>{{title}}</title>
 		<link href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed" rel="stylesheet">
-		<link rel="stylesheet" href="/stylesheets/style.css" type="text/css" media="screen" title="no title" charset="utf-8">
+		<link rel="stylesheet" href="/stylesheets/main.css" type="text/css" media="screen" title="no title" charset="utf-8">
+		<link rel="stylesheet" href="/stylesheets/styles.css" type="text/css" media="screen" title="no title" charset="utf-8">
 </head>
 <body>
-  <nav>
+  <nav class="padded-container">
   	<ul>
-  		<li><a href="/">All reviews</a></li>
-  		<li><a href="/reviews/mine">My reviews</a></li>
-  		<li><a href="/reviews/add">Add review!</a></li>
+  		<li><a href="/">Dream Journal</a></li>
+      <div class="header-right padded">
+        {{#if loggedIn}}
+    		<li><a href="/settings">Settings</a></li>
+        <li><a href="/logout">Logout</a></li>
+        {{else}}
+    		<li><a href="/register">Register</a></li>
+    		<li><a href="/login">Login</a></li>
+        {{/if}}
+      </div>
   	</ul>
   </nav>
-  <div id="content" class="container">
+  <div class="container">
   	{{{ body }}}
   </div>
 </body>
