@@ -1,15 +1,14 @@
 const path = require('path')
 const webpack = require('webpack')
 const nodeExternals = require('webpack-node-externals')
+const config = require('./config')
 
 module.exports = {
-  entry: {
-    server: './app.js',
-  },
+  entry: ['./src/scss/styles.scss'],
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: path.join(__dirname, 'public'),
     publicPath: '/',
-    filename: '[name].js'
+    filename: 'stylesheets/[name].css'
   },
   target: 'node',
   node: {
@@ -23,15 +22,27 @@ module.exports = {
       {
         test: /\.s[ac]ss$/i,
         use: [
-          // Creates `style` nodes from JS strings
-          "style-loader",
-          // Translates CSS into CommonJS
-          "css-loader",
-          // Compiles Sass to CSS
-          "sass-loader",
-        ],
+					{
+						loader: 'file-loader',
+						options: {
+							name: 'stylesheets/[name].css',
+						}
+					},
+					{
+						loader: 'extract-loader'
+					},
+					{
+						loader: 'css-loader'
+					},
+					{
+						loader: 'postcss-loader'
+					},
+					{
+						loader: 'sass-loader'
+					}
+				],
       }
     ]
   },
-  mode: 'development'
+  mode: config.get('env')
 };

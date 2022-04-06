@@ -104,5 +104,6 @@ An Example Dream:
 
 ## Annotations / References Used
 
-1. [Setting up Sass and Webpack](https://dev.to/deepanjangh/setting-up-css-and-sass-with-webpack-3cg)
+1. [Setting up Sass and Webpack](https://florianbrinkmann.com/en/sass-webpack-4240/)
 2. [For setting up Webpack with Express](https://binyamin.medium.com/creating-a-node-express-webpack-app-with-dev-and-prod-builds-a4962ce51334)
+3.

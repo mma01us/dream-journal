@@ -4,7 +4,9 @@
   "description": "A journal to track your dreams.",
   "main": "app.js",
   "scripts": {
-    "test": "node app.js"
+    "test": "node app.js",
+    "build": "rm -rf dist && webpack --mode development --config webpack.server.config.js && webpack --mode development",
+    "start": "node ./dist/server.js"
   },
   "repository": {
     "type": "git",
@@ -17,19 +19,23 @@
   },
   "homepage": "https://github.com/nyu-csci-ua-0467-001-002-spring-2022/final-project-mma01us#readme",
   "devDependencies": {
+    "autoprefixer": "^10.4.4",
     "css-loader": "^6.7.1",
     "eslint": "^8.12.0",
     "eslint-plugin-mocha": "^10.0.3",
+    "extract-loader": "^5.1.0",
+    "file-loader": "^6.2.0",
     "mini-css-extract-plugin": "^2.6.0",
+    "postcss-loader": "^6.2.1",
     "sass": "^1.49.9",
     "sass-loader": "^12.6.0",
-    "style-loader": "^3.3.1",
     "webpack": "^5.70.0",
     "webpack-cli": "^4.9.2",
     "webpack-node-externals": "^3.0.0"
   },
   "dependencies": {
     "convict": "^6.2.1",
+    "convict-format-with-validator": "^6.2.0",
     "express": "^4.17.3",
     "express-session": "^1.17.2",
     "hbs": "^4.2.0",

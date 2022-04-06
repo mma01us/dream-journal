@@ -1,5 +1,4 @@
 require('./db');
-import "./src/scss/styles.scss"; // testing
 
 const express = require('express');
 const path = require('path');
@@ -31,4 +30,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/profile', profile);
 
-app.listen(config.app.port);
+// use var here so async callback gets value
+var server = app.listen(config.get('port'), config.get('ip'), () => {
+  const add = server.address();
+  console.log('running on http://' + add.address + ':' + add.port);
+});

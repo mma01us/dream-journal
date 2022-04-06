@@ -3,8 +3,8 @@ const mongoose = require('mongoose'),
 
 const config = require('./config')
 // unpack into vars
-const { db: { host, port, name } } = config
-
+const host = config.get('db.host');
+const name = config.get('db.name');
 
 const User = new mongoose.Schema({
 	username: { type: String, required: true, index: { unique: true } },
