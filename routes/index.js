@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
+const crypto = require('crypto'); // for password security
 
 router.get('/', (req, res) => {
   // if logged in, redirect to /profile
@@ -54,11 +55,11 @@ router.post('/register', (req, res) => {
 
   if(err1 || err2 || err3){
     console.log(err1, err2, err3);
-    res.render('register', { title: "Dream Journal - Login", err1: err1, err2: err2, err3: err3});
+    res.render('register', { title: "Dream Journal - Register", err1: err1, err2: err2, err3: err3});
   } else {
     const newUser = {
       username: username,
-      pass: pass,
+      pass: crypto.createHash('md5').update(pass).digest("hex"),
       theme: 0,
       calendar: false,
       dreams:  [] // maybe add a default dream that's a tutorial page
@@ -68,10 +69,10 @@ router.post('/register', (req, res) => {
       if(err){
         // failure - check if username already exists
         if (err.code && err.code === 11000) {
-          res.render('register', { title: "Dream Journal - Login", err1: 'Username already exists!'});
+          res.render('register', { title: "Dream Journal - Register", err1: 'Username already exists!'});
         } else {
           console.log(err);
-          res.render('register', { title: "Dream Journal - Login", err4: 'Unknown error. Check logs.'});
+          res.render('register', { title: "Dream Journal - Register", err4: 'Unknown error. Check logs.'});
         }
       } else {
           // success!
@@ -84,7 +85,31 @@ router.post('/register', (req, res) => {
 
 router.post('/login', (req, res) => {
   // if user is valid login, else, render login again with err msg
-  res.redirect('/');
+  // cleanup
+  const username = req.body.dreamuname;
+  const pass = req.body.dreampass;
+
+  // parse
+  let err;
+  if(!username || !pass){
+    err = 'Must enter a username and password';
+    res.render('login', { title: "Dream Journal - Login", err: err});
+  } else {
+    const loginQuery = { username: username, pass: crypto.createHash('md5').update(pass).digest("hex")};
+
+    User.find(loginQuery, function(err, user, count) {
+      if(user){
+        req.session.user = username;
+        req.session.data = user;
+        res.locals.user = user; // haven't decided exactly what to do here
+        res.locals.loggedIn = true;
+        res.redirect('profile');
+      } else {
+        console.log(err, user, count);
+        res.render('login', { title: "Dream Journal - Login", err: "Unexpected error. Check logs."} );
+      }
+    });
+  }
 });
 
 router.get('/logout', (req, res) => {

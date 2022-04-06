@@ -6,6 +6,7 @@
   "scripts": {
     "test": "npx nodemon app.js",
     "build": "npx webpack",
+    "watch": "npx webpack --watch",
     "start": "node app.js",
     "verify": "npx eslint ."
   },

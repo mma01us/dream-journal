@@ -39,6 +39,7 @@ nav .header-right {
   max-width: 85vw;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 20px;
 }
 
 .center {
@@ -55,6 +56,10 @@ nav .header-right {
   background-color: #f2f2f2;
   padding: 20px;
   max-width: 50vw;
+}
+
+.small {
+  font-size: 0.75rem;
 }
 
 .error {
