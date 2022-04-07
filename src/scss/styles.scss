@@ -99,7 +99,7 @@ input[type=password], select {
   box-sizing: border-box;
 }
 
-input[type=submit] {
+input[type=submit], input[type=button] {
   width: 100%;
   background-color: $bg-color;
   color: $fg-color;
@@ -113,4 +113,8 @@ input[type=submit] {
 
 input[type=submit]:hover {
   background-color: $primary-color;
+}
+
+input[type=button]:hover {
+  background-color: red;
 }

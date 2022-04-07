@@ -100,8 +100,8 @@ router.post('/login', (req, res) => {
     User.find(loginQuery, function(err, data, count) {
       if(data.length == 1){
         req.session.user = username;
-        req.session.data = data;
-        res.locals.user = data; // haven't decided exactly what to do here
+        req.session.data = data[0];
+        res.locals.user = data[0]; // haven't decided exactly what to do here
         res.locals.loggedIn = true;
         res.redirect('profile');
       } else {

@@ -1,15 +1,7 @@
 <div class="center">
   <h1>My Dreams</h1>
-  <h2>Welcome {{user.username}}.</h2>
+  <h2>Welcome {{user}}.</h2>
   <p>You've currently selected the calendar view (which has yet to be implemented!)</p>
-  {{#if theme == 0}}
-  <p>The theme you have chosen is default.*</p>
-  {{#elif theme == 1}}
-  <p>The theme you have chosen is dark.*</p>
-  {{#elif theme == 2}}
-  <p>The theme you have chosen is holiday.*</p>
-  {{else}}
-  <p>You have chosen an invalid theme, but it will be reset to default.*</p>
-  {{#/if}}
+  <p>{{theme}}</p>
   <p class="small">Theming with Sass has yet to be implemented (but auto compiling with Webpack has been set up!).</p>
 </div>

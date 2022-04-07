@@ -1,0 +1,26 @@
+<div class="card center-self">
+  <h1 class="center">Settings</h1>
+  <form method="post">
+    <label for="mode">View Mode:</label>
+    <select id="mode" name="mode">
+      {{#if user.calendar}}
+      <option value=1>Calendar</option>
+      <option value=0>List</option>
+      {{else}}
+      <option value=0>List</option>
+      <option value=1>Calendar</option>
+      {{/if}}
+    </select>
+    <label for="theme">Theme:</label>
+    <select id="theme" name="theme">
+      <option value={{selected.val}}>{{selected.name}}</option>
+      {{#each themes}}
+      <option value={{this.val}}>{{this.name}}</option>
+      {{/each}}
+    </select>
+    <input type="Submit" value="Save"/>
+    <input type="button" value="Cancel" onclick="window.location.href='/profile';">
+    <p class="error">{{err}}</p>
+    <p class="small">Not a user yet? Register for free <a href="register">here</a>!</p>
+  </form>
+</div>

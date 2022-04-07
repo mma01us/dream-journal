@@ -1,8 +1,9 @@
 require('./db');
 
 const express = require('express');
-const path = require('path');
-const config = require('./config'); // convict config
+const exphbs  = require('express-handlebars');
+const path    = require('path');
+const config  = require('./config'); // convict config
 
 const routes = require('./routes/index'); // applies to all routes
 const profile = require('./routes/profile'); // routes for logged in user
@@ -13,6 +14,13 @@ const app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
+app.engine('.hbs', exphbs.engine({
+  defaultLayout: 'layout',
+  extname: '.hbs',
+  helpers: require('./utility/hbs-helpers'),
+  partialsDir: "views/partials/",
+  layoutsDir: "views/"
+}));
 app.set('view engine', 'hbs');
 
 // enable sessions
