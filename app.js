@@ -51,8 +51,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/profile', profile);
 
+// change to use convict correctly here
+const port = process.env.PORT || config.get('port');
+
 // use var here so async callback gets value
-var server = app.listen(config.get('port'), config.get('ip'), () => {
+var server = app.listen(config.get('port'), () => {
   const add = server.address();
   console.log('running on http://' + add.address + ':' + add.port);
 });
