@@ -97,16 +97,16 @@ router.post('/login', (req, res) => {
   } else {
     const loginQuery = { username: username, pass: crypto.createHash('md5').update(pass).digest("hex")};
 
-    User.find(loginQuery, function(err, user, count) {
-      if(user){
+    User.find(loginQuery, function(err, data, count) {
+      if(data.length == 1){
         req.session.user = username;
-        req.session.data = user;
-        res.locals.user = user; // haven't decided exactly what to do here
+        req.session.data = data;
+        res.locals.user = data; // haven't decided exactly what to do here
         res.locals.loggedIn = true;
         res.redirect('profile');
       } else {
-        console.log(err, user, count);
-        res.render('login', { title: "Dream Journal - Login", err: "Unexpected error. Check logs."} );
+        console.log(err, data, count);
+        res.render('login', { title: "Dream Journal - Login", err: "Incorrect Username or Password."} );
       }
     });
   }
