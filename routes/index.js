@@ -77,6 +77,8 @@ router.post('/register', (req, res) => {
       } else {
           // success!
           req.session.user = username;
+          req.session.data = newUser;
+          res.locals.user = newUser;
           res.redirect('/');
       }
     });
