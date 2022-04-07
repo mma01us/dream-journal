@@ -7,7 +7,7 @@
     "test": "npx nodemon app.js",
     "build": "npx webpack",
     "watch": "npx webpack --watch",
-    "start": "rm -rf node_modules package-lock.json && npm install && node app.js",
+    "start": "node app/app.js",
     "verify": "npx eslint ."
   },
   "repository": {
