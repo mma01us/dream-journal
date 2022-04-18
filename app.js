@@ -52,7 +52,7 @@ app.use('/', routes);
 app.use('/profile', profile);
 
 // w/ heroku - port is assigned
-const port = config.get('port');
+const port = config.get('env') == 'production' ? process.env.PORT : config.get('port');
 const ip = config.get('ip');
 
 // use var here so async callback gets value
