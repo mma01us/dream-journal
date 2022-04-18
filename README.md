@@ -2,7 +2,7 @@
 
 ## Overview
 
-Have you ever had a dream that was really interesting but forgot about it an hour later? Dream Journal is a web application that let's you track your dreams. Users must login to store their dreams so they remain between sessions. Dreams are linked with a date and include a scale for users to rate how they felt afterwards. Users can name the dream. Additionally, users can view a calendar view of all of their dreams and how they felt about them. Included will be a settings menu for users to choose if they want a list or calendar view as their main page, and a theme customization. (If time permitting, users can share their dreams for others to see on a public forum. Other users can upvote or downvote a dream.)
+Have you ever had a dream that was really interesting but forgot about it an hour later? Dream Journal is a web application that let's you track your dreams. Users must login to store their dreams so they remain between sessions. Dreams are linked with a date and include a scale for users to rate how they felt afterwards. Users can name the dream. Additionally, users can view a calendar view of all of their dreams and how they felt about them. Included will be a settings menu for users to choose if they want a list or calendar view as their main page, and a theme customization.
 
 
 ## Data Model
@@ -37,10 +37,7 @@ An Example Dream:
 }
 ```
 
-
-## [Link to Commented First Draft Schema](db.js)
-
-(__TODO__: update schema draft in db.js_)
+## [Link to Schema](db.js)
 
 ## Wireframes
 
@@ -70,8 +67,8 @@ An Example Dream:
 
 1. as non-registered user, I can register a new account with the site
 2. as a user, I can log in to the site
-3. as a user, I can create a new dream entry
-4. as a user, I can view all of my dream entries
+3. as a user, I can view all of my dream entries
+4. as a user, I can create a new dream entry
 6. as a user, I can view my settings
 7. as a user, I can change my visual settings in the settings
 8. as a user, I can view a specific dream entry
@@ -85,12 +82,11 @@ An Example Dream:
   * (2 points) Sass as a CSS preprocessor to help with managing themes.
 * (1 point) External Client Side Library: [Calendarize](https://www.npmjs.com/package/calendarize) for generating the calendar view. It's relatively lightweight and I will need to make changes on top of it so I am assigning it one point.
 * (1 point) External Client Side Library: [rich-markdown-editor](https://www.npmjs.com/package/rich-markdown-editor) for a nice text editor for users to use while editing and writing their dream entries.
-* (1 point) External Client Side Library [canvas-sketch](https://www.npmjs.com/package/canvas-sketch) for users to draw images of their dreams if time permitting. Most of the package is fleshed out so I am assigning it one point.
 * (0 points) External Server Side Library [greeting-time](https://www.npmjs.com/package/greeting-time) for getting a greeting message depending on time of day.
 
 
 
-10 points total out of 8 required points (11 if time permitting)
+10 points total out of 8 required points
 
 
 ## [Link to Initial Main Project File](app.js)
