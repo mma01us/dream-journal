@@ -1,0 +1,10 @@
+{
+  "env": "production",
+  "ip": "127.0.0.1",
+  "port": process.env.PORT,
+  "db": {
+    "prefix": mongodb+srv,
+    "host": process.env.db_host,
+    "name": process.env.db_name
+  }
+}

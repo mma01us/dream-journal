@@ -51,11 +51,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/profile', profile);
 
-// change to use convict correctly here
-const port = process.env.PORT || config.get('port');
+// w/ heroku - port is assigned
+const port = config.get('port');
+const ip = config.get('ip');
 
 // use var here so async callback gets value
-var server = app.listen(config.get('port'), () => {
+var server = app.listen(config.get('port'), config.get('ip'), () => {
   const add = server.address();
   console.log('running on http://' + add.address + ':' + add.port);
 });

@@ -24,6 +24,11 @@ var config = convict({
     arg: 'port'
   },
   db: {
+    prefix: {
+      doc: 'Prefix for db connection string',
+      format: String,
+      default: "mongodb"
+    },
     host: {
       doc: 'Database host name/IP',
       format: '*',
@@ -38,7 +43,8 @@ var config = convict({
 });
 //
 // Load environment dependent configuration
-// var env = config.get('env');
-// config.loadFile('./config/' + env + '.json');
+var env = config.get('env');
+config.loadFile('./config/' + env + '.json');
+config.validate();
 
 module.exports = config;

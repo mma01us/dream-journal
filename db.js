@@ -38,5 +38,5 @@ mongoose.model('User', User);
 mongoose.model('Dream', Dream);
 mongoose.model('Section', Section);
 // unfortunately this is hardcoded for now
-//mongoose.connect(`mongodb://${host}/${name}`);
+mongoose.connect(`mongodb+srv://${host}/${name}`);
 mongoose.connect(`mongodb+srv://michael:HhcoE6KDAQ5cr6YL@dreamjournalcluster.f9nai.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`);

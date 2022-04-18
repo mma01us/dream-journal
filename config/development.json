@@ -1,0 +1,10 @@
+{
+  "env": "development",
+  "ip" :"127.0.0.1",
+  "port": "8080",
+  "db": {
+    "prefix": "mongodb",
+    "host" : "localhost",
+    "name" : "dreamdb"
+  }
+}
