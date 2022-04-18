@@ -1,7 +1,10 @@
 <div class="center">
   <h1>My Dreams</h1>
-  <h2>Welcome {{user}}.</h2>
-  <p>You've currently selected the list view (which has yet to be implemented!)</p>
-  <p>{{theme}}</p>
-  <p class="small">Theming with Sass has yet to be implemented (but auto compiling with Webpack has been set up!).</p>
+  <h2>{{greeting}}, {{user}}.</h2>
+  <div class="list">
+    <a href="profile/create" class="inverted"><i class="fa-solid fa-plus"></i> Add New Dream</a>
+    {{#each dream}}
+    <a href="profile/dream/{{this._id}}"><i class="fa-solid fa-face-{{this.face}}"></i> {{this.name}} ({{this.date}})</a>
+    {{/each}}
+  </div>
 </div>

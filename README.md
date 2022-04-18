@@ -94,6 +94,7 @@ An Example Dream:
 * (1 point) External Client Side Library: [Calendarize](https://www.npmjs.com/package/calendarize) for generating the calendar view. It's relatively lightweight and I will need to make changes on top of it so I am assigning it one point.
 * (1 point) External Client Side Library: [rich-markdown-editor](https://www.npmjs.com/package/rich-markdown-editor) for a nice text editor for users to use while editing and writing their dream entries.
 * (1 point) External Client Side Library [canvas-sketch](https://www.npmjs.com/package/canvas-sketch) for users to draw images of their dreams if time permitting. Most of the package is fleshed out so I am assigning it one point.
+* (0 points) External Server Side Library [greeting-time](https://www.npmjs.com/package/greeting-time) for getting a greeting message depending on time of day.
 
 
 
@@ -109,3 +110,11 @@ An Example Dream:
 3. No explicit links: Documentation pages for Sass, Webpack, Crypto
 4. [Handlebars helpers](https://stackoverflow.com/questions/41423727/handlebars-registerhelper-serverside-with-expressjs)
 5. [Handlebars helper for dropdown forms](https://stackoverflow.com/questions/13046401/how-to-set-selected-select-option-in-handlebars-template)
+
+## Usage and Scripts:
+
+1. npm run test: run and track changes
+2. npm run build: build scss into css
+3. npm run watch: automatically track and build scss into css
+4. npm run start: run the app
+5. npm run verify: run eslint on the files

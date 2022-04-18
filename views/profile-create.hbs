@@ -1,0 +1,31 @@
+<div class="card center-self">
+  <h1 class="center">New Dream</h1>
+  <form method="post">
+    <label for="dreamname">Dream Name:</label>
+    <input type="text" name="dreamname" id="dreamname" required>
+    <p class="error">{{err1}}</p>
+    <label for="date">Date:</label>
+    <input type="date" id="date" name="date">
+    <br/>
+    <br/>
+    <label for="dreamquality">Dream Clarity:</label>>
+    <input type="range" min="1" max="10" value="1" name="dreamquality" id="dreamquality">
+    <p class="error">{{err2}}</p>
+    <label for="dreamrating">Mood:</label>
+    <select id="dreamrating" name="dreamrating" class="dreamrating">
+      <option value=0>&#x1F610;</option>
+      <option value=1>&#x1F604;</option>
+      <option value=2>&#x2639;</option>
+      <option value=3>&#x1F62D;</option>
+    </select>
+    <p class="error">{{err3}}</p>
+    <label for="content">My Dream:</label>
+    <br/>
+    <br/>
+    <textarea id="content" name="content" rows="5" cols="100"></textarea>
+    <p class="error">{{err4}}</p>
+    <input type="Submit" value="Save"/>
+    <input type="button" value="Cancel" onclick="window.location.href='/profile';">
+    <p class="error">{{err5}}</p>
+  </form>
+</div>

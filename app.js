@@ -56,7 +56,8 @@ const port = config.get('port');
 const ip = config.get('ip');
 
 // use var here so async callback gets value
-var server = app.listen(config.get('port'), config.get('ip'), () => {
+var server = app.listen(config.get('port'), () => {
   const add = server.address();
+  console.log('ip from config: ', ip);
   console.log('running on http://' + add.address + ':' + add.port);
 });

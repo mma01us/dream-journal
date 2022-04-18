@@ -3,12 +3,14 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
-const Section = mongoose.model('Section');
 const Dream = mongoose.model('Dream');
+const greetingTime = require("greeting-time");
 
 // TODO: fully correct and dynamic implementation of this so adding new themes is easy
 const themeslist = ['Default', 'Dark', 'Sunset', 'City'];
 const themes = themeslist.map(theme => { return { val: themeslist.indexOf(theme), name: theme }; });
+const moods = ['meh', 'grin-beam', 'frown', 'sad-cry'];
+const greeting = greetingTime(new Date());
 
 // TODO: add middleware to check if logged in
 
@@ -35,9 +37,28 @@ router.get('/', (req, res) => {
     }
 
     if(req.session.data.calendar){
-      res.render('profile-calendar', {title: "Dream Journal - Calendar", theme: msg});
+      res.render('profile-calendar', {title: "Dream Journal - Calendar", theme: msg, greeting: greeting});
     } else {
-      res.render('profile-list', { title: "Dream Journal - List", theme: msg});
+      const query = {user: req.session.data._id};
+      Dream.find(query, function(err, data, count) {
+        if(data.length > 0){
+          const dreams = [];
+          data.forEach(d => {
+            const dream = {
+              _id: d.slug,
+              name: d.name,
+              face: moods[d.mood],
+              date: d.date.toLocaleDateString("en-US", {month:'numeric', day: 'numeric'})
+            };
+            dreams.push(dream);
+          });
+          //console.log(dreams);
+          res.render('profile-list', { title: "Dream Journal - List", theme: msg, greeting: greeting, dream: dreams});
+        } else {
+          console.log(err, data, count);
+          res.redirect('/');
+        }
+      });
     }
   } else {
     res.redirect('/');
@@ -84,6 +105,87 @@ router.post('/settings', (req, res) => {
     } else {
       res.redirect('/'); // profile then redirects to index
     }
+});
+
+router.get('/create', (req, res) => {
+  if(req.session.user){
+    res.render('profile-create', { title: "Dream Journal - Create" });
+  } else {
+    res.redirect('/');
+  }
+});
+
+router.post('/create', (req, res) => {
+  if(req.session.user){
+    // cleanup
+    const name = req.body.dreamname;
+    const quality = isNaN(req.body.dreamquality) ? 1 : parseInt(req.body.dreamquality);
+    const mood = isNaN(req.body.dreamrating) ? 0 : parseInt(req.body.dreamrating);
+    const content = req.body.content;
+    const date = new Date(req.body.date);
+
+    // query
+    const query = {username: req.session.user};
+    const user = mongoose.Types.ObjectId(req.session.data._id);
+
+    const newDream = {
+      user: user,
+      name: name,
+      date: date,
+      quality: quality,
+      mood: mood,
+      content: content,
+      lastEdit: new Date()
+    };
+
+    const dreamObj = new Dream(newDream);
+
+    //console.log(dreamObj);
+
+    dreamObj.save(function(err, cat, count){
+      if(err){
+        console.log(err, cat, count);
+        res.redirect('/');
+      } else {
+        User.findOneAndUpdate(query, { $push: {dreams: dreamObj._id} }, function(err, doc) {
+          if(err){
+              console.log(err, doc);
+          } else {
+            req.session.data.dreams.push(dreamObj._id);
+            res.locals.user = req.session.data;
+            console.log("saved new dream");
+          }
+          res.redirect('./profile');
+        });
+      }
+    });
+  } else {
+    res.redirect('/');
+  }
+});
+
+
+router.get('/dream/:slug', (req, res) => {
+  const slug = req.params.slug;
+  const query = {slug: slug};
+
+  Dream.find(query, function(err, data, count) {
+    if(data.length == 1){
+      const raw = data[0];
+      const dream = {
+        name: raw.name,
+        quality: raw.quality,
+        face: moods[raw.mood],
+        date: raw.date.toLocaleDateString("en-US", {month:'numeric', day: 'numeric'}),
+        content: raw.content
+      };
+      console.log(dream);
+      res.render('slug', { title: "Dream Journal - List", dream: dream });
+    } else {
+      console.log(err, data, count);
+      res.redirect('profile');
+    }
+  });
 });
 
 module.exports = router;
