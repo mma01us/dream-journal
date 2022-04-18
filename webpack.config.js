@@ -1,7 +1,6 @@
 const path = require('path')
 const webpack = require('webpack')
-const nodeExternals = require('webpack-node-externals')
-const config = require('./config')
+const nodeExternals = require('webpack-node-externals')\
 
 module.exports = {
   entry: ['./src/scss/styles.scss'],
@@ -43,6 +42,5 @@ module.exports = {
 				],
       }
     ]
-  },
-  mode: config.get('env')
+  }
 };
