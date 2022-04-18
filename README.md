@@ -10,7 +10,6 @@ Have you ever had a dream that was really interesting but forgot about it an hou
 The application will store Users, Dreams, and Sections
 
 * users can have multiple dreams (via references - this is to set up the structure for sharing)
-* dreams can have multiple sections (embedded)
 
 An Example User:
 
@@ -33,10 +32,7 @@ An Example Dream:
   date: // recorded date of dream
   quality: // user recorded quality of dream
   mood: // user mood - stored as integer - how they felt in the morning
-  sections: [
-    { item: "text", checked: false},
-    { item: "image", data: "/images/image.png"},
-  ],
+  content: // content of the dream
   lastEdit: // timestamp for last edit
 }
 ```
@@ -57,7 +53,7 @@ An Example Dream:
 
 ![list create](documentation/profile-create.png)
 
-/profile/slug - page for viewing and editing specific dream
+/profile/dream/slug - page for viewing and editing specific dream
 
 ![list](documentation/profile-dream.png)
 
@@ -70,16 +66,12 @@ An Example Dream:
 ![Alt text](documentation/site-map1.png "Sitemap")
 *Target Sitemap*
 
-![Alt text](documentation/site-map1.png "Sitemap")
-*Sharing Sitemap - To be implemented if time permitting*
-
 ## User Stories or Use Cases
 
 1. as non-registered user, I can register a new account with the site
 2. as a user, I can log in to the site
 3. as a user, I can create a new dream entry
 4. as a user, I can view all of my dream entries
-5. as a user, I can edit existing dream entries
 6. as a user, I can view my settings
 7. as a user, I can change my visual settings in the settings
 8. as a user, I can view a specific dream entry
