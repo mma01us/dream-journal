@@ -4,7 +4,7 @@
   <div class="list">
     <a href="profile/create" class="inverted"><i class="fa-solid fa-plus"></i> Add New Dream</a>
     {{#each dream}}
-    <a href="profile/dream/{{this._id}}"><i class="fa-solid fa-face-{{this.face}}"></i> {{this.name}} ({{this.date}})</a>
+    <a href="profile/dream/{{this._id}}">{{{this.face}}} {{this.name}} ({{this.date}})</a>
     {{/each}}
   </div>
 </div>

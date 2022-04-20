@@ -1,163 +1,174 @@
-$primary-color: blue;
-$fg-color: white;
-$bg-color: black;
+@mixin themable($theme-name, $screen-bg, $button-bg, $btn-text, $text, $card-bg) {
+   .#{$theme-name} {
+      color: $text;
+      background-color: $screen-bg;
+      margin: 0;
+      padding: 0;
+      font-family: 'Lato', sans-serif;
 
-body {
-  color: $bg-color;
-  margin: 0;
-  padding: 0;
-  font-family: 'Lato', sans-serif;
-}
+      nav {
+        background-color: $button-bg;
+        color: $btn-text;
 
-nav {
-  background-color: $bg-color;
-  color: $fg-color;
+        ul {
+          margin: 0;
+          list-style: none;
+        }
 
-  ul {
-    margin: 0;
-    list-style: none;
-  }
+        li {
+          display: inline-block;
 
-  li {
-    display: inline-block;
+          a {
+            display: block;
+            padding: 12px 12px;
+            text-decoration: none;
+            color: $btn-text;
+            transition: 0.5s;
+          }
 
-    a {
-      display: block;
-      padding: 12px 12px;
-      text-decoration: none;
-      color: $fg-color;
-      transition: 0.5s;
-    }
+          &:hover {
+            a {
+              color: $button-bg;
+              background-color: $btn-text;
+            }
+          }
+        }
 
-    &:hover {
-      a {
-        color: $bg-color;
-        background-color: $fg-color;
+        .header-right {
+          float: right;
+        }
+      }
+
+      .padded-container {
+        padding-left: 7.5vw;
+        padding-right: 7.5vw;
+      }
+
+      .container {
+        max-width: 85vw;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 20px;
+      }
+
+      .center {
+        text-align: center;
+      }
+
+      .center-self {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .card {
+        border-radius: 5px;
+        background-color: $card-bg;
+        padding: 20px;
+        max-width: 50vw;
+      }
+
+      .small {
+        font-size: .75rem;
+      }
+
+      .error {
+        font-size: .75rem;
+        color: red;
+        margin-top: -4px;
+      }
+
+      input[type=text], select {
+        width: 100%;
+        padding: 12px 6px;
+        margin: 8px 0;
+        display: block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+
+      input[type=password], select {
+        width: 100%;
+        padding: 12px 6px;
+        margin: 8px 0;
+        display: block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+
+      input[type=submit], input[type=button] {
+        width: 100%;
+        background-color: $button-bg;
+        color: $btn-text;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: .5s;
+      }
+
+      input[type=submit]:hover {
+        background-color: $btn-text;
+        color: $button-bg;
+        border: 2px solid $button-bg;
+      }
+
+      input[type=button]:hover {
+        background-color: red;
+      }
+
+      input[type=range]{
+
+      }
+
+      option, select {
+        text-transform:capitalize;
+      }
+
+      .dreamrating {
+        font-size: 1.2rem;
+      }
+
+      .list {
+        display: block;
+        max-width: 75%;
+        margin-left: auto;
+        margin-right: auto;
+        a {
+            display: block;
+            border: 1px solid $text;
+            border-radius: 6px;
+            box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
+            color: $text;
+            background-color: $screen-bg;
+            cursor: pointer;
+            font-size: 1.25rem;
+            font-weight: bold;
+            padding: 12px 10px;
+            text-decoration: none;
+        }
+        a:hover {
+          border: 1px solid $button-bg;
+          background-color: $text;
+          color: $screen-bg;
+        }
+        .inverted {
+          color: $btn-text;
+          background-color: $button-bg;
+          border: none;
+        }
+        .inverted:hover {
+          color: $button-bg;
+          background-color: $btn-text;
+          border: 2px solid $button-bg;
+        }
       }
     }
-  }
-
-  .header-right {
-    float: right;
-  }
 }
 
-.padded-container {
-  padding-left: 7.5vw;
-  padding-right: 7.5vw;
-}
-
-.container {
-  max-width: 85vw;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 20px;
-}
-
-.center {
-  text-align: center;
-}
-
-.center-self {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.card {
-  border-radius: 5px;
-  background-color: #f2f2f2;
-  padding: 20px;
-  max-width: 50vw;
-}
-
-.small {
-  font-size: .75rem;
-}
-
-.error {
-  font-size: .75rem;
-  color: red;
-  margin-top: -4px;
-}
-
-input[type=text], select {
-  width: 100%;
-  padding: 12px 6px;
-  margin: 8px 0;
-  display: block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
-
-input[type=password], select {
-  width: 100%;
-  padding: 12px 6px;
-  margin: 8px 0;
-  display: block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
-
-input[type=submit], input[type=button] {
-  width: 100%;
-  background-color: $bg-color;
-  color: $fg-color;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: .5s;
-}
-
-input[type=submit]:hover {
-  background-color: $primary-color;
-}
-
-input[type=button]:hover {
-  background-color: red;
-}
-
-input[type=range]{
-
-}
-
-select {
-  font-family: 'FontAwesome', 'Lato', 'sans-serif';
-}
-
-.dreamrating {
-  font-size: 1.2rem;
-}
-
-.list {
-  display: block;
-  max-width: 75%;
-  margin-left: auto;
-  margin-right: auto;
-  a {
-      display: block;
-      border: 1px solid rgba(27, 31, 35, .15);
-      border-radius: 6px;
-      box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
-      color: #000;
-      cursor: pointer;
-      font-size: 1.25rem;
-      font-weight: bold;
-      padding: 12px 10px;
-      text-decoration: none;
-  }
-  a:hover {
-    border: 1px solid $primary-color;
-  }
-  .inverted {
-    color: $fg-color;
-    background-color: $primary-color;
-  }
-  .inverted:hover {
-    color: $primary-color;
-    background-color: $fg-color;
-  }
-}
+@include themable(default, white, blue, white, black, #f2f2f2);
+@include themable(dark, black, #110070, white, white, #3a3a3a);
+@include themable(sunset, #070014, #b3721e, white, white, #3a3a3a);
+@include themable(city, #999999, #34aeeb, black, white, #3a3a3a);

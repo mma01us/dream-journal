@@ -13,10 +13,9 @@
     <p class="error">{{err2}}</p>
     <label for="dreamrating">Mood:</label>
     <select id="dreamrating" name="dreamrating" class="dreamrating">
-      <option value=0>&#x1F610;</option>
-      <option value=1>&#x1F604;</option>
-      <option value=2>&#x2639;</option>
-      <option value=3>&#x1F62D;</option>
+      {{#each option}}
+        <option value={{this.num}}>{{{this.val}}}</option>
+      {{/each}}
     </select>
     <p class="error">{{err3}}</p>
     <label for="content">My Dream:</label>

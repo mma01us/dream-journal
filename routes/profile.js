@@ -7,37 +7,20 @@ const Dream = mongoose.model('Dream');
 const greetingTime = require("greeting-time");
 
 // TODO: fully correct and dynamic implementation of this so adding new themes is easy
-const themeslist = ['Default', 'Dark', 'Sunset', 'City'];
+const themeslist = ['default', 'dark', 'sunset', 'city'];
 const themes = themeslist.map(theme => { return { val: themeslist.indexOf(theme), name: theme }; });
-const moods = ['meh', 'grin-beam', 'frown', 'sad-cry'];
+const moods = ['&#x1F610;', '&#x1F604;', '&#x1F641;', '&#x1F62D;'];
 const greeting = greetingTime(new Date());
 
 // TODO: add middleware to check if logged in
 
 router.get('/', (req, res) => {
   if(req.session.user){
-    let msg = "";
     console.log(req.session.data);
-    switch(req.session.data.theme){
-      case 0:
-        msg = "You've selected the default theme.";
-        break;
-      case 1:
-        msg = "You've selected the dark theme.";
-        break;
-      case 2:
-        msg = "You've selected the sunset theme.";
-        break;
-      case 3:
-        msg = "You've selected the city theme.";
-        break;
-      default:
-        msg = "You've selected an invalid theme, which is automatically default.";
-        break;
-    }
+    const theme = themeslist[req.session.data.theme];
 
     if(req.session.data.calendar){
-      res.render('profile-calendar', {title: "Dream Journal - Calendar", theme: msg, greeting: greeting});
+      res.render('profile-calendar', {title: "Dream Journal - Calendar", theme: theme, greeting: greeting});
     } else {
       const query = {user: req.session.data._id};
       Dream.find(query, function(err, data, count) {
@@ -53,7 +36,7 @@ router.get('/', (req, res) => {
             dreams.push(dream);
           });
           //console.log(dreams);
-          res.render('profile-list', { title: "Dream Journal - List", theme: msg, greeting: greeting, dream: dreams});
+          res.render('profile-list', { title: "Dream Journal - List", theme: theme, greeting: greeting, dream: dreams});
         } else {
           console.log(err, data, count);
           res.redirect('/');
@@ -69,8 +52,9 @@ router.get('/settings', (req, res) => {
     if(req.session.user){
       const selected = { val: req.session.data.theme, name: themeslist[req.session.data.theme] };
       const unselected = themes.filter(theme => theme.val !== selected.val);
+      const theme = themeslist[req.session.data.theme];
       console.log(themes);
-      res.render('settings', { title: "Dream Journal - Settings", selected: selected, themes: unselected});
+      res.render('settings', { title: "Dream Journal - Settings", selected: selected, themes: unselected, theme: theme});
     } else {
       res.redirect('/');
     }
@@ -109,7 +93,8 @@ router.post('/settings', (req, res) => {
 
 router.get('/create', (req, res) => {
   if(req.session.user){
-    res.render('profile-create', { title: "Dream Journal - Create" });
+    const theme = themeslist[req.session.data.theme];
+    res.render('profile-create', { title: "Dream Journal - Create", theme: theme, option: moods.map((v, n) => ({val: v, num: n}))});
   } else {
     res.redirect('/');
   }
@@ -180,7 +165,8 @@ router.get('/dream/:slug', (req, res) => {
         content: raw.content
       };
       console.log(dream);
-      res.render('slug', { title: "Dream Journal - List", dream: dream });
+      const theme = themeslist[req.session.data.theme];
+      res.render('slug', { title: "Dream Journal - List", theme: theme, dream: dream });
     } else {
       console.log(err, data, count);
       res.redirect('profile');
