@@ -38,7 +38,7 @@ router.get('/', (req, res) => {
           //console.log(dreams);
           res.render('profile-list', { title: "Dream Journal - List", theme: theme, greeting: greeting, dream: dreams});
         } else {
-          console.log('Error with query:', query, 'vals:' err, data, count);
+          console.log('Error with query:', query, 'vals:', err, data, count);
           res.send('Database Error.');
         }
       });
