@@ -116,7 +116,7 @@ router.post('/create', (req, res) => {
     const newDream = {
       user: user,
       name: name,
-      date: date,
+      date: !isNaN(date) ? date : new Date(),
       quality: quality,
       mood: mood,
       content: content,
@@ -140,7 +140,7 @@ router.post('/create', (req, res) => {
             res.locals.user = req.session.data;
             console.log("saved new dream");
           }
-          res.redirect('./profile');
+          res.redirect('/');
         });
       }
     });
