@@ -1,4 +1,4 @@
-<h1>{{dream.name}} ({{dream.date}})</h1>
+<h1>{{dream.name}} ({{dream.date}}) <a href='{{dream.slug}}' id="delete-dream" class="icon-btn"><i class="fa fa-trash" aria-hidden="true"></i></a></h1>
 <div>
   <h3>Dream Clarity: {{dream.quality}}/10</h3>
   <h3>Mood: {{{dream.face}}}</h3>
@@ -7,3 +7,4 @@
   {{dream.content}}
 </p>
 <input type="button" value="Back" onclick="window.location.href='/profile';">
+<script src="../../js/slug.js"></script>

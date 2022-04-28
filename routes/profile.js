@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const Dream = mongoose.model('Dream');
 const greetingTime = require("greeting-time");
+const calendarize = require('calendarize');
 
 // TODO: fully correct and dynamic implementation of this so adding new themes is easy
 const themeslist = ['default', 'dark', 'sunset', 'city'];
@@ -20,7 +21,26 @@ router.get('/', (req, res) => {
     const theme = themeslist[req.session.data.theme];
 
     if(req.session.data.calendar){
-      res.render('profile-calendar', {title: "Dream Journal - Calendar", theme: theme, greeting: greeting});
+      const query = {user: req.session.data._id};
+      Dream.find(query, function(err, data, count) {
+        if(data.length > 0){
+          const dreams = [];
+          data.forEach(d => {
+            const dream = {
+              _id: d.slug,
+              name: d.name,
+              face: moods[d.mood],
+              date: d.date.toLocaleDateString("en-US", {month:'numeric', day: 'numeric'})
+            };
+            dreams.push(dream);
+          });
+          //console.log(dreams);
+          res.render('profile-calendar', { title: "Dream Journal - List", theme: theme, greeting: greeting, dream: dreams});
+        } else {
+          console.log('Empty query:', query, 'vals:', err, data, count);
+          res.render('profile-calendar', { title: "Dream Journal - List", theme: theme, greeting: greeting});
+        }
+      });
     } else {
       const query = {user: req.session.data._id};
       Dream.find(query, function(err, data, count) {
@@ -151,27 +171,52 @@ router.post('/create', (req, res) => {
 
 
 router.get('/dream/:slug', (req, res) => {
-  const slug = req.params.slug;
-  const query = {slug: slug};
+  if(req.session.user){
+    const slug = req.params.slug;
+    const query = {slug: slug};
 
-  Dream.find(query, function(err, data, count) {
-    if(data.length == 1){
-      const raw = data[0];
-      const dream = {
-        name: raw.name,
-        quality: raw.quality,
-        face: moods[raw.mood],
-        date: raw.date.toLocaleDateString("en-US", {month:'numeric', day: 'numeric'}),
-        content: raw.content
-      };
-      console.log(dream);
-      const theme = themeslist[req.session.data.theme];
-      res.render('slug', { title: "Dream Journal - List", theme: theme, dream: dream });
-    } else {
-      console.log(err, data, count);
-      res.redirect('profile');
-    }
-  });
+    Dream.find(query, function(err, data, count) {
+      if(data.length == 1){
+        const raw = data[0];
+        const dream = {
+          name: raw.name,
+          quality: raw.quality,
+          face: moods[raw.mood],
+          date: raw.date.toLocaleDateString("en-US", {month:'numeric', day: 'numeric'}),
+          content: raw.content,
+          slug: slug
+        };
+        console.log(dream);
+        const theme = themeslist[req.session.data.theme] || 1;
+        res.render('slug', { title: "Dream Journal - List", theme: theme, dream: dream });
+      } else {
+        console.log(err, data, count);
+        res.redirect('profile');
+      }
+    });
+  } else {
+    res.redirect('/');
+  }
+});
+
+router.post('/dream/delete', (req, res) => {
+  if(req.session.user){
+    const slug = req.body.slug;
+      console.log(slug);
+    const query = {slug: slug};
+
+    Dream.findOneAndDelete(query, function(err, data, count) {
+      if(!err){
+        console.log(err, data, count);
+        res.json({data: data});
+      } else {
+        console.log('Error deleting: ', err, data, count);
+        res.json({error: err});
+      }
+    });
+  } else {
+    res.redirect('/');
+  }
 });
 
 module.exports = router;
