@@ -148,6 +148,66 @@
         background-color: $text;
       }
 
+      .btn-small {
+          display: block;
+          margin-left: auto;
+          margin-right: auto;
+          margin-bottom: 10px;
+          max-width: 200px;
+          border-radius: 6px;
+          box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
+          color: $btn-text;
+          background-color: $button-bg;
+          border: 2px solid $button-bg;
+          cursor: pointer;
+          font-size: 1.25rem;
+          font-weight: bold;
+          padding: 12px 10px;
+          text-decoration: none;
+      }
+      .btn-small:hover {
+          color: $button-bg;
+          background-color: $btn-text;
+          border: 2px solid $button-bg;
+      }
+
+      h5{
+        margin: 0;
+        padding: 0;
+        font-weight: bold;
+      }
+
+      table {
+        margin-left: auto;
+        margin-right: auto;
+        background-color: $card-bg;
+        width: 50rem;
+        border: 1px solid $text;
+        border-collapse: collapse;
+        th{
+          background-color: $text;
+          color: $screen-bg;
+          border: 1px solid $text;
+        }
+        td {
+          border: 1px solid $text;
+          vertical-align: top;
+          width: 75px;
+          height: 75px;
+
+          a {
+            margin-top: auto;
+            margin-bottom: auto;
+            font-size: 2rem;
+            text-decoration: none;
+          }
+        }
+      }
+
+      .hidden {
+        visibility: hidden;
+      }
+
       .list {
         display: block;
         max-width: 75%;

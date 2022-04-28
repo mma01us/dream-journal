@@ -1,7 +1,34 @@
 <div class="center">
   <h1>My Dreams</h1>
   <h2>{{greeting}}, {{user}}.</h2>
-  <p>You've currently selected the calendar view (which has yet to be implemented!)</p>
-  <p>{{theme}}</p>
-  <p class="small">Theming with Sass has yet to be implemented (but auto compiling with Webpack has been set up!).</p>
+  <h1>{{title}}</h1>
+  <a href="profile/create" class="btn-small"><i class="fa-solid fa-plus"></i> Add New Dream</a>
+  <div>
+    <table>
+      <tr>
+        <th>Sun</th>
+        <th>Mon</th>
+        <th>Tues</th>
+        <th>Wed</th>
+        <th>Thurs</th>
+        <th>Fri</th>
+        <th>Sat</th>
+      </tr>
+    {{#each view}}
+      <tr>
+        {{#each this.week}}
+          <td>
+            {{#if this.dream}}
+              <h5>{{this.day}}</h5>
+              <a href="profile/dream/{{this.dream._id}}">{{{this.dream.face}}}</a>
+              {{else}}
+              <h5>{{this.day}}</h5>
+              <a class="hidden" href="">&#x1F610;</a>
+            {{/if}}
+          </td>
+        {{/each}}
+      </tr>
+    {{/each}}
+    </table>
+  </div>
 </div>

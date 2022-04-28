@@ -21,21 +21,36 @@ router.get('/', (req, res) => {
     const theme = themeslist[req.session.data.theme];
 
     if(req.session.data.calendar){
-      const query = {user: req.session.data._id};
+      const query = {user: req.session.data._id, $sort: { date : 1 } };
       Dream.find(query, function(err, data, count) {
         if(data.length > 0){
-          const dreams = [];
-          data.forEach(d => {
-            const dream = {
-              _id: d.slug,
-              name: d.name,
-              face: moods[d.mood],
-              date: d.date.toLocaleDateString("en-US", {month:'numeric', day: 'numeric'})
+          const title = data[0].date.toLocaleDateString("en-US", {month: 'long', year: 'numeric'});
+          let dreams = data.map(d => {
+              return {
+                _id: d.slug,
+                name: d.name,
+                face: moods[d.mood],
+                date: d.date.toLocaleDateString("en-US", {month:'numeric', day: 'numeric', year:'numeric'}
+              )};
+          }).filter(d => d.date.split('/')[-1] != '');
+          const thismonth = dreams[0].date.split('/')[0];
+          dreams = dreams.filter(d => d.date.split('/')[0] == thismonth);
+          let view = calendarize(dreams[0].date);
+          view = view.map(week => {
+            return { week: week.map(date => {
+                if(date != 0){
+                  return {
+                    day: date,
+                    dream: dreams.filter(d => d.date.split('/')[1] == `${date}`)[0]
+                  };
+                } else {
+                  return {};
+                }
+              })
             };
-            dreams.push(dream);
           });
-          //console.log(dreams);
-          res.render('profile-calendar', { title: "Dream Journal - List", theme: theme, greeting: greeting, dream: dreams});
+          console.log(thismonth, view);
+          res.render('profile-calendar', { title: "Dream Journal - List", theme: theme, greeting: greeting, title: title, view: view});
         } else {
           console.log('Empty query:', query, 'vals:', err, data, count);
           res.render('profile-calendar', { title: "Dream Journal - List", theme: theme, greeting: greeting});
@@ -45,15 +60,13 @@ router.get('/', (req, res) => {
       const query = {user: req.session.data._id};
       Dream.find(query, function(err, data, count) {
         if(data.length > 0){
-          const dreams = [];
-          data.forEach(d => {
-            const dream = {
-              _id: d.slug,
-              name: d.name,
-              face: moods[d.mood],
-              date: d.date.toLocaleDateString("en-US", {month:'numeric', day: 'numeric'})
-            };
-            dreams.push(dream);
+          const dreams = data.map(d => {
+              return {
+                _id: d.slug,
+                name: d.name,
+                face: moods[d.mood],
+                date: d.date.toLocaleDateString("en-US", {month:'numeric', day: 'numeric'}
+              )};
           });
           //console.log(dreams);
           res.render('profile-list', { title: "Dream Journal - List", theme: theme, greeting: greeting, dream: dreams});
