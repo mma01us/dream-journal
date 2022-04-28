@@ -96,8 +96,7 @@ An Example Dream:
 1. [Setting up Sass and Webpack](https://florianbrinkmann.com/en/sass-webpack-4240/)
 2. [For setting up Webpack with Express](https://binyamin.medium.com/creating-a-node-express-webpack-app-with-dev-and-prod-builds-a4962ce51334)
 3. No explicit links: Documentation pages for Sass, Webpack, Crypto
-4. [Handlebars helpers](https://stackoverflow.com/questions/41423727/handlebars-registerhelper-serverside-with-expressjs)
-5. [Handlebars helper for dropdown forms](https://stackoverflow.com/questions/13046401/how-to-set-selected-select-option-in-handlebars-template)
+4. [Theming with Sass](https://www.toptal.com/sass/theming-scss-tutorial)
 
 ## Usage and Scripts:
 
