@@ -1,9 +1,9 @@
 require('./db');
 
 const express = require('express');
-const exphbs  = require('express-handlebars');
-const path    = require('path');
-const config  = require('./config'); // convict config
+const exphbs = require('express-handlebars');
+const path = require('path');
+const config = require('./config'); // convict config
 
 const routes = require('./routes/index'); // applies to all routes
 const profile = require('./routes/profile'); // routes for logged in user
@@ -52,11 +52,11 @@ app.use('/', routes);
 app.use('/profile', profile);
 
 // w/ heroku - port is assigned
-const port = config.get('env') == 'production' ? process.env.PORT : config.get('port');
+//const port = config.get('env') === 'production' ? process.env.PORT : config.get('port');
 const ip = config.get('ip');
 
 // use var here so async callback gets value
-var server = app.listen(config.get('port'), () => {
+const server = app.listen(config.get('port'), () => {
   const add = server.address();
   console.log('ip from config: ', ip);
   console.log('running on http://' + add.address + ':' + add.port);

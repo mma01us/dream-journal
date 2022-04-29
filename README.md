@@ -50,7 +50,7 @@ An Example Dream:
 
 ![list create](documentation/profile-create.png)
 
-/profile/dream/slug - page for viewing and editing specific dream
+/profile/dream/slug - page for viewing and deleting a specific dream
 
 ![list](documentation/profile-dream.png)
 
@@ -72,6 +72,7 @@ An Example Dream:
 6. as a user, I can view my settings
 7. as a user, I can change my visual settings in the settings
 8. as a user, I can view a specific dream entry
+9. as a user, I can delete a specific dream entry
 
 ## Research Topics
 
@@ -80,13 +81,12 @@ An Example Dream:
 * (3 points) Configuration management - Node convict to manage deploys on local machine and free website hosting service such as Herokuapp.
 * (3 points) Webpack to automate:
   * (2 points) Sass as a CSS preprocessor to help with managing themes.
-* (1 point) External Client Side Library: [Calendarize](https://www.npmjs.com/package/calendarize) for generating the calendar view. It's relatively lightweight and I will need to make changes on top of it so I am assigning it one point.
-* (1 point) External Client Side Library: [rich-markdown-editor](https://www.npmjs.com/package/rich-markdown-editor) for a nice text editor for users to use while editing and writing their dream entries.
-* (0 points) External Server Side Library [greeting-time](https://www.npmjs.com/package/greeting-time) for getting a greeting message depending on time of day.
+* (.5 point) External Library: [Calendarize](https://www.npmjs.com/package/calendarize) for generating the calendar view. It's relatively lightweight and I will need to make changes on top of it so I am assigning it half a point.
+* (.5 points) External Library [greeting-time](https://www.npmjs.com/package/greeting-time) for getting a greeting message depending on time of day. Similar to calendarize, it's very lightweight and more for utility so I am assigning it half a point.
 
 
 
-10 points total out of 8 required points
+9 points total out of 8 required points
 
 
 ## [Link to Initial Main Project File](app.js)

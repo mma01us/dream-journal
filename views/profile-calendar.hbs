@@ -1,34 +1,38 @@
 <div class="center">
   <h1>My Dreams</h1>
   <h2>{{greeting}}, {{user}}.</h2>
-  <h1>{{title}}</h1>
-  <a href="profile/create" class="btn-small"><i class="fa-solid fa-plus"></i> Add New Dream</a>
-  <div>
-    <table>
-      <tr>
-        <th>Sun</th>
-        <th>Mon</th>
-        <th>Tues</th>
-        <th>Wed</th>
-        <th>Thurs</th>
-        <th>Fri</th>
-        <th>Sat</th>
-      </tr>
-    {{#each view}}
-      <tr>
-        {{#each this.week}}
-          <td>
-            {{#if this.dream}}
-              <h5>{{this.day}}</h5>
-              <a href="profile/dream/{{this.dream._id}}">{{{this.dream.face}}}</a>
-              {{else}}
-              <h5>{{this.day}}</h5>
-              <a class="hidden" href="">&#x1F610;</a>
-            {{/if}}
-          </td>
-        {{/each}}
-      </tr>
-    {{/each}}
-    </table>
-  </div>
+    <h1>{{calendarName}}</h1>
+    <a href="profile/create" class="btn-small"><i class="fa-solid fa-plus"></i> Add New Dream</a>
+  {{#if calendarName}}
+    <div>
+      <table>
+        <tr>
+          <th>Sun</th>
+          <th>Mon</th>
+          <th>Tues</th>
+          <th>Wed</th>
+          <th>Thurs</th>
+          <th>Fri</th>
+          <th>Sat</th>
+        </tr>
+      {{#each view}}
+        <tr>
+          {{#each this.week}}
+            <td>
+              {{#if this.dream}}
+                <h5>{{this.day}}</h5>
+                <a href="profile/dream/{{this.dream._id}}">{{{this.dream.face}}}</a>
+                {{else}}
+                <h5>{{this.day}}</h5>
+                <a class="hidden" href="">&#x1F610;</a>
+              {{/if}}
+            </td>
+          {{/each}}
+        </tr>
+      {{/each}}
+      </table>
+    </div>
+  {{else}}
+    <h1>No dreams logged yet.</h1>
+  {{/if}}
 </div>

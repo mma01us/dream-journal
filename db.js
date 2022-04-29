@@ -1,10 +1,10 @@
 const mongoose = require('mongoose'),
-	URLSlugs = require('mongoose-url-slugs')
+	URLSlugs = require('mongoose-url-slugs');
 
-const config = require('./config')
+const config = require('./config');
 // unpack into vars
-const host = config.get('env') == 'production' ? process.env.db_host : config.get('db.host');
-const name = config.get('env') == 'production' ? process.env.db_name : config.get('db.name');
+const host = config.get('env') === 'production' ? process.env.db_host : config.get('db.host');
+const name = config.get('env') === 'production' ? process.env.db_name : config.get('db.name');
 const prefix = config.get('db.prefix');
 
 const User = new mongoose.Schema({

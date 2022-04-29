@@ -49,7 +49,7 @@ router.post('/register', (req, res) => {
     if(!confirm){
       err3 = 'Must enter a valid matching password';
     }
-  } else if(pass != confirm){
+  } else if(pass !== confirm){
     err3 = 'Must enter matching passwords';
   }
 
@@ -71,7 +71,7 @@ router.post('/register', (req, res) => {
         if (err.code && err.code === 11000) {
           res.render('register', { title: "Dream Journal - Register", err1: 'Username already exists!'});
         } else {
-          console.log(err);
+          console.log(err, cat, count);
           res.render('register', { title: "Dream Journal - Register", err4: 'Unknown error. Check logs.'});
         }
       } else {
@@ -100,7 +100,7 @@ router.post('/login', (req, res) => {
     const loginQuery = { username: username, pass: crypto.createHash('md5').update(pass).digest("hex")};
 
     User.find(loginQuery, function(err, data, count) {
-      if(data.length == 1){
+      if(data.length === 1){
         req.session.user = username;
         req.session.data = data[0];
         res.locals.user = data[0]; // haven't decided exactly what to do here

@@ -1,9 +1,9 @@
-var convict = require('convict');
+const convict = require('convict');
 
 convict.addFormat(require('convict-format-with-validator').ipaddress);
 
 // Define a schema
-var config = convict({
+const config = convict({
   env: {
     doc: 'The application environment.',
     format: ['production', 'development', 'test'],
@@ -43,7 +43,7 @@ var config = convict({
 });
 //
 // Load environment dependent configuration
-var env = config.get('env');
+const env = config.get('env');
 config.loadFile('./config/' + env + '.json');
 config.validate();
 

@@ -24,7 +24,7 @@ router.get('/', (req, res) => {
       const query = {user: req.session.data._id, $sort: { date : 1 } };
       Dream.find(query, function(err, data, count) {
         if(data.length > 0){
-          const title = data[0].date.toLocaleDateString("en-US", {month: 'long', year: 'numeric'});
+          const calendarName = data[0].date.toLocaleDateString("en-US", {month: 'long', year: 'numeric'});
           let dreams = data.map(d => {
               return {
                 _id: d.slug,
@@ -32,16 +32,16 @@ router.get('/', (req, res) => {
                 face: moods[d.mood],
                 date: d.date.toLocaleDateString("en-US", {month:'numeric', day: 'numeric', year:'numeric'}
               )};
-          }).filter(d => d.date.split('/')[-1] != '');
+          }).filter(d => d.date.split('/')[-1] !== '');
           const thismonth = dreams[0].date.split('/')[0];
-          dreams = dreams.filter(d => d.date.split('/')[0] == thismonth);
+          dreams = dreams.filter(d => d.date.split('/')[0] === thismonth);
           let view = calendarize(dreams[0].date);
           view = view.map(week => {
             return { week: week.map(date => {
-                if(date != 0){
+                if(date !== 0){
                   return {
                     day: date,
-                    dream: dreams.filter(d => d.date.split('/')[1] == `${date}`)[0]
+                    dream: dreams.filter(d => d.date.split('/')[1] === `${date}`)[0]
                   };
                 } else {
                   return {};
@@ -50,7 +50,7 @@ router.get('/', (req, res) => {
             };
           });
           console.log(thismonth, view);
-          res.render('profile-calendar', { title: "Dream Journal - List", theme: theme, greeting: greeting, title: title, view: view});
+          res.render('profile-calendar', { title: "Dream Journal - List", theme: theme, greeting: greeting, calendarName: calendarName, view: view});
         } else {
           console.log('Empty query:', query, 'vals:', err, data, count);
           res.render('profile-calendar', { title: "Dream Journal - List", theme: theme, greeting: greeting});
@@ -105,10 +105,10 @@ router.post('/settings', (req, res) => {
 
       User.updateOne(query, update, function (err, docs) {
           if (err){
-              console.log("Error updating user", err);
+              console.log("Error updating user", err, docs);
           }
           else{
-              console.log("Updated User: ", update);
+              console.log("Updated User: ", update, docs);
           }
       });
 
@@ -189,7 +189,7 @@ router.get('/dream/:slug', (req, res) => {
     const query = {slug: slug};
 
     Dream.find(query, function(err, data, count) {
-      if(data.length == 1){
+      if(data.length === 1){
         const raw = data[0];
         const dream = {
           name: raw.name,
