@@ -76,17 +76,11 @@ An Example Dream:
 
 ## Research Topics
 
-(__TODO__: update research topics during development_)
-
-* (3 points) Configuration management - Node convict to manage deploys on local machine and free website hosting service such as Herokuapp.
-* (3 points) Webpack to automate:
-  * (2 points) Sass as a CSS preprocessor to help with managing themes.
-* (.5 point) External Library: [Calendarize](https://www.npmjs.com/package/calendarize) for generating the calendar view. It's relatively lightweight and I will need to make changes on top of it so I am assigning it half a point.
-* (.5 points) External Library [greeting-time](https://www.npmjs.com/package/greeting-time) for getting a greeting message depending on time of day. Similar to calendarize, it's very lightweight and more for utility so I am assigning it half a point.
-
-
-
-9 points total out of 8 required points
+* Configuration management - Node convict to manage deploys on local machine and free website hosting service such as Herokuapp.
+* Webpack to automate:
+  * Sass as a CSS preprocessor to help with managing themes.
+* External Library: [Calendarize](https://www.npmjs.com/package/calendarize) for generating the calendar view. It's relatively lightweight and I will need to make changes on top of it so I am assigning it half a point.
+* External Library [greeting-time](https://www.npmjs.com/package/greeting-time) for getting a greeting message depending on time of day. Similar to calendarize, it's very lightweight and more for utility so I am assigning it half a point.
 
 
 ## [Link to Initial Main Project File](app.js)
