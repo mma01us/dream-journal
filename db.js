@@ -29,6 +29,4 @@ Dream.plugin(URLSlugs('name'));
 
 mongoose.model('User', User);
 mongoose.model('Dream', Dream);
-// unfortunately this is hardcoded for now
 mongoose.connect(`${prefix}://${host}/${name}`);
-//mongoose.connect(`mongodb+srv://michael:HhcoE6KDAQ5cr6YL@dreamjournalcluster.f9nai.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`);
